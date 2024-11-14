@@ -78,7 +78,7 @@ userRouter.post("/api/v1/user/signin", async (c) => {
       },
       c.env.JWT_SECRET
     );
-    console.log("user created" + user.username + user.password);
+    console.log("user signed in " + user.username + user.password);
     return c.text(jwt);
   } catch (e) {
     console.log(e + "error");
