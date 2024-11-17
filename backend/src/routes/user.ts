@@ -18,6 +18,7 @@ userRouter.post("/signup", async (c) => {
   const { success } = signupInput.safeParse(body);
   if (!success) {
     console.log("error");
+    alert("input validation failed");
     return c.json({
       error: "Invalid input",
     });
@@ -35,6 +36,7 @@ userRouter.post("/signup", async (c) => {
       data: {
         username: body.username,
         password: body.password,
+        name: body.name,
       },
     });
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
@@ -71,6 +73,7 @@ userRouter.post("/signin", async (c) => {
 
     if (!user) {
       c.status(403);
+      alert("invalid username or passworwd");
       return c.json({ error: "Invalid username or password" });
     }
     const jwt = await sign(

@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 // import { ChangeEvent } from "react";
 import { signupInput } from "@dhruvsovasaria/medium-common";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
+
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
 
   const [postInputs, setPostInputs] = useState<signupInput>({
-    username: " ",
+    username: "",
     password: "",
     name: "",
   });
@@ -25,12 +26,13 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
       localStorage.setItem("token", jwt);
       navigate("/blogs");
     } catch (e) {
-      console.log("error while signing up :" + e);
-      alert("error while signing up");
+      console.log("error while signing up ");
+      alert("error while signing up " + e);
     }
   }
   return (
     <div className="h-screen flex-col flex justify-center items-center text-center">
+      {JSON.stringify(postInputs)}
       <div className="max-w-md">
         <div className="text-3xl font-bold px-10">Create an account</div>
         <div className="font-semibold text-slate-500">
@@ -57,7 +59,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
           ) : null}
           <LabeledInput
             label="Username"
-            placeholder="dhruvxyz"
+            placeholder="dhruvxyz@gmail.com"
             onChange={(e) => {
               setPostInputs((c) => {
                 return { ...c, username: e.target.value };

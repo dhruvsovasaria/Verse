@@ -21,7 +21,7 @@ export const blogRouter = new Hono<{
 blogRouter.use("/*", async (c, next) => {
   //   check whether they are logged in , and if they are logged in then
   {
-    const authHeader = c.req.header("authorization") || "";
+    const authHeader = c.req.header("Authorization") || "";
     const user = await verify(authHeader, c.env.JWT_SECRET);
     console.log(user);
     if (user) {
@@ -110,7 +110,18 @@ blogRouter.get("/bulk", async (c) => {
   // this is the route for updating theblog
 
   try {
-    const blogs = await prisma.blog.findMany();
+    const blogs = await prisma.blog.findMany({
+      select: {
+        content: true,
+        title: true,
+        id: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
     return c.json(blogs);
   } catch (e) {
     // c.status(404);
