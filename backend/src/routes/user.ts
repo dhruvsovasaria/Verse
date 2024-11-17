@@ -22,11 +22,12 @@ userRouter.post("/signup", async (c) => {
       error: "Invalid input",
     });
   }
+
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
-  // const users = await prisma.user.findMany();
 
+  // const users = await prisma.user.findMany();
   //zod , hashed password
   try {
     //duplicate
@@ -44,7 +45,7 @@ userRouter.post("/signup", async (c) => {
     return c.json({ error: e });
   }
 });
-userRouter.post("/api/v1/user/signin", async (c) => {
+userRouter.post("/signin", async (c) => {
   // return c.text("Hello Hono !");
   const body = await c.req.json();
   const { success } = signinInput.safeParse(body);

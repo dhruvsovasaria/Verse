@@ -1,8 +1,8 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import Signup from "./pages/Signup";
-import Login from "./pages/Signin";
+import Signin from "./pages/Signin";
 import Blog from "./pages/Blog";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Login />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/blog/:id" element={<Blog />} />
         </Routes>
       </Router>

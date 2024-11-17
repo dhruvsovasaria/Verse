@@ -120,7 +120,7 @@ blogRouter.get("/bulk", async (c) => {
 });
 
 blogRouter.get("/:id", async (c) => {
-  // const body = await c.req.json(); - get endoint does not have a body
+  // const body = await c.req.json();
   const id = c.req.param("id");
   console.log(id);
   const prisma = new PrismaClient({

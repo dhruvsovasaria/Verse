@@ -5,6 +5,7 @@ import { sign, decode, verify } from "hono/jwt";
 // import { Jwt } from "hono/utils/jwt";
 import { blogRouter } from "./routes/blog";
 import { userRouter } from "./routes/user";
+import { cors } from "hono/cors";
 
 const app = new Hono<{
   Bindings: {
@@ -12,21 +13,14 @@ const app = new Hono<{
     JWT_SECRET: string;
   };
 }>();
-
+app.use("/*", cors());
 app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
 
-app.post("/api/v1/user/", (c) => {
-  return c.text("Hello Hono!");
-});
-app.post("/api/v1/user/sign", (c) => {
-  return c.text("Hello Hono!");
-});
-app.put("/api/v1/user/signi", (c) => {
-  return c.text("Hello Hono!");
-});
-app.put("/api/v1/user/sig", (c) => {
-  return c.text("Hello Hono!");
+app.get("/", (c) => {
+  return c.json({
+    message: "hello",
+  });
 });
 
 export default app;
