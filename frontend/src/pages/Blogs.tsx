@@ -8,11 +8,11 @@ const Blogs = () => {
 
   if (loading) {
     return (
-      <div>
+      <div className="max-w-full">
         <Navbar authorname="Dhruv Sovasaria" />
-
-        <BlogsSkeleton />
-        <BlogsSkeleton />
+        <div className="flex flex-col w-3/5 ">
+          <BlogsSkeleton />
+        </div>
       </div>
     );
   }

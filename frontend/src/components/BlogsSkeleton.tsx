@@ -2,7 +2,7 @@ const BlogsSkeleton = () => {
   return (
     <div
       role="status"
-      className="h-screen w-screen p-6 space-y-6 border border-gray-200 divide-y divide-gray-200 animate-pulse"
+      className="h-screen w-screen p-6 space-y-6  border border-gray-200 divide-y divide-gray-200 animate-pulse"
     >
       {Array.from({ length: 10 }).map((_, index) => (
         <div key={index} className="flex items-center justify-between py-4">
