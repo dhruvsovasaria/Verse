@@ -1,3 +1,4 @@
+import BlogSkeleton from "../components/BlogSkeleton";
 import { FullBlog } from "../components/FullBlog";
 import { useBlog } from "../hooks";
 import { useParams } from "react-router-dom";
@@ -8,7 +9,14 @@ const Blog = () => {
   const { loading, blog } = useBlog({ id: id || "" });
   // console.log(id);
   if (loading) {
-    return <div>getting your blog ...</div>;
+    return (
+      <div className="mt-36">
+        <BlogSkeleton />
+        <BlogSkeleton />
+        <BlogSkeleton />
+        <BlogSkeleton />
+      </div>
+    );
   }
 
   return (

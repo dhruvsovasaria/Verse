@@ -1,4 +1,5 @@
 import BlogCard from "../components/BlogCard";
+import BlogsSkeleton from "../components/BlogsSkeleton";
 import Navbar from "../components/Navbar";
 import { useBlogs } from "../hooks";
 
@@ -6,7 +7,14 @@ const Blogs = () => {
   const { blogs, loading } = useBlogs();
 
   if (loading) {
-    return <div>getting your blogs ...</div>;
+    return (
+      <div>
+        <Navbar authorname="Dhruv Sovasaria" />
+
+        <BlogsSkeleton />
+        <BlogsSkeleton />
+      </div>
+    );
   }
   if (!blogs) {
     return <div>No blogs available</div>;
