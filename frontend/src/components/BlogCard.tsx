@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+
 interface BlogCardProps {
   authorname: string;
   title: string;
   content: string;
   publishedDate: string;
+  id: string;
 }
 
 const BlogCard = ({
@@ -10,22 +13,25 @@ const BlogCard = ({
   content,
   publishedDate,
   title,
+  id,
 }: BlogCardProps) => {
   return (
     <div className=" pl-3 border-gray-100    shadow-sm mb-4 hover:cursor-pointer hover:shadow-md transition duration-500 rounded-lg pr-6 display-inline w-full">
-      <span className="pr-2">
-        <Avatar size={"small"} authorname={authorname} />
-      </span>
-      <span className="font-light text-sm">
-        <span className="font-semibold">{authorname}</span> • {publishedDate}
-      </span>
-      <div className="title&content pl-6 py-4 flex  flex-col">
-        <div className="font-semibold text-xl">{title} </div>
-        <div className="font-thin">{content.slice(0, 150) + " ..."}</div>
-      </div>
-      <div className="text-sm font-normal text-gray-400 p-4 pt-0">
-        {Math.ceil(content.length / 300)} minute(s) read
-      </div>
+      <Link to={`/blog/${id}`}>
+        <span className="pr-2">
+          <Avatar size={"small"} authorname={authorname} />
+        </span>
+        <span className="font-light text-sm">
+          <span className="font-semibold">{authorname}</span> • {publishedDate}
+        </span>
+        <div className="title&content pl-6 py-4 flex  flex-col">
+          <div className="font-semibold text-xl">{title} </div>
+          <div className="font-thin">{content.slice(0, 150) + " ..."}</div>
+        </div>
+        <div className="text-sm font-normal text-gray-400 p-4 pt-0">
+          {Math.ceil(content.length / 300)} minute(s) read
+        </div>{" "}
+      </Link>
     </div>
   );
 };
@@ -40,13 +46,11 @@ export function Avatar({
   size?: "small" | "big";
 }) {
   const getInitials = (name: string) => {
-    return (
-      name
-        .split(" ")
-        //capitalise the letter and then join
-        .map((word) => word[0].toUpperCase())
-        .join("")
-    );
+    return name
+      .trim() // Remove leading and trailing spaces
+      .split(" ")
+      .map((word) => word[0]?.toUpperCase() || ":)") // Safely access the first character and convert to uppercase
+      .join("");
   };
 
   return (

@@ -18,6 +18,7 @@ const Blogs = () => {
         <div className="flex flex-col items-center w-full max-w-3xl px-2">
           {blogs.map((blog) => (
             <BlogCard
+              id={blog.id}
               title={blog.title}
               content={blog.content}
               publishedDate="04/08/2004"
